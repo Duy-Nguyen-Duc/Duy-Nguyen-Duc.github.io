@@ -1,0 +1,60 @@
+/* ---------------------------------------------------------------------------
+ * Site-specific additions on top of the vendored al-folio stylesheet.
+ * Everything here is either a new element the base theme has no rule for,
+ * or an anchor-offset fix. No base typography is overridden.
+ * --------------------------------------------------------------------------- */
+
+/* "Under review at ICLR '26." / "Best Paper Award." trailing notes in the
+   bibliography — same weight as .bib-author, italicised to read as a status. */
+.publications ol.bibliography .bib-note {
+  font-size: .85rem;
+  font-style: italic;
+  color: var(--global-text-color-light);
+}
+
+/* The base theme sets scroll-margin-top on headings only; these two anchor
+   targets are divs, so they need it explicitly to clear the fixed navbar. */
+#publications,
+.news {
+  scroll-margin-top: 66px;
+}
+
+/* Keep the placeholder portrait circular until a real photo replaces it. */
+.profile img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Project-demo thumbnails: a touch of contrast so the placeholder SVGs read
+   as images rather than empty space. Harmless once real images are dropped in. */
+.post table img {
+  background-color: var(--global-card-bg-color);
+}
+
+/* The base theme forces every <span> to --global-text-color, which is black
+   against the dark footer bar. The footer year span must inherit instead. */
+footer.fixed-bottom .container span {
+  color: inherit;
+}
+
+/* The base theme hard-codes a 78px column for the venue badge, which is
+   narrower than labels like "MEDIAEVAL '24" — they overflow the gap and collide
+   with the title. Promote the whole list to one grid so the badge column sizes
+   to the widest badge and every row stays aligned. */
+.publications ol.bibliography {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 1rem;
+  row-gap: .7rem;
+  align-items: baseline;
+}
+.publications ol.bibliography li,
+.publications ol.bibliography .bib-row {
+  display: contents;
+}
+
+/* Put the author list on its own line beneath the title. */
+.publications ol.bibliography .bib-title {
+  display: block;
+  margin-bottom: .1rem;
+}
